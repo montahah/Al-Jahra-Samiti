@@ -521,6 +521,7 @@
       collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, writeBatch
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+    // Your Firebase project config
     const firebaseConfig = {
       apiKey: "AIzaSyCnTMzSg1b08jVxmCTjxxqXTh_L1wntarc",
       authDomain: "al-jahra-samiti.firebaseapp.com",
@@ -529,20 +530,6 @@
       messagingSenderId: "493756747629",
       appId: "1:493756747629:web:cc515c4a2d676ffe271464"
     };
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {
-      initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
-      collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, writeBatch
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    // =====================================================
-    // 1) PASTE YOUR FIREBASE CONFIG HERE (Project settings → Your apps → Web app)
-    // =====================================================
 
     // 2) Admin logins (full access). Everyone else who can log in is view-only.
     //    The SAME list must be in your Firestore security rules (see setup guide).
