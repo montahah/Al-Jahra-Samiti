@@ -514,20 +514,22 @@
        APP LOGIC (Firebase: Auth + Firestore realtime sync)
   =========================================== -->
   <script type="module">
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
+      collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, writeBatch
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCnTMzSg1b08jVxmCTjxxqXTh_L1wntarc",
-  authDomain: "al-jahra-samiti.firebaseapp.com",
-  projectId: "al-jahra-samiti",
-  storageBucket: "al-jahra-samiti.firebasestorage.app",
-  messagingSenderId: "493756747629",
-  appId: "1:493756747629:web:cc515c4a2d676ffe271464"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyCnTMzSg1b08jVxmCTjxxqXTh_L1wntarc",
+      authDomain: "al-jahra-samiti.firebaseapp.com",
+      projectId: "al-jahra-samiti",
+      storageBucket: "al-jahra-samiti.firebasestorage.app",
+      messagingSenderId: "493756747629",
+      appId: "1:493756747629:web:cc515c4a2d676ffe271464"
+    };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -541,14 +543,6 @@ const app = initializeApp(firebaseConfig);
     // =====================================================
     // 1) PASTE YOUR FIREBASE CONFIG HERE (Project settings → Your apps → Web app)
     // =====================================================
-    const firebaseConfig = {
-      apiKey: "PASTE_API_KEY",
-      authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-      projectId: "PASTE_PROJECT_ID",
-      storageBucket: "PASTE_PROJECT_ID.appspot.com",
-      messagingSenderId: "PASTE_SENDER_ID",
-      appId: "PASTE_APP_ID"
-    };
 
     // 2) Admin logins (full access). Everyone else who can log in is view-only.
     //    The SAME list must be in your Firestore security rules (see setup guide).
