@@ -186,6 +186,14 @@
               <p class="text-sm font-bold text-purple-100 mb-1 relative z-10 uppercase tracking-wide">প্রত্যাশিত মুনাফা (Profit)</p>
               <h3 id="dash-profit" class="text-2xl md:text-3xl font-black tabular-nums relative z-10 truncate">+0.000 <span class="text-lg">KWD</span></h3>
             </div>
+
+            <!-- NEW: হাতে নগদ (Cash in Hand) card - full-width row under the 4 existing cards -->
+            <div class="sm:col-span-2 lg:col-span-4 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 p-6 rounded-3xl shadow-lg shadow-amber-500/30 text-white relative overflow-hidden">
+              <i class="fa-solid fa-sack-dollar absolute -right-2 -bottom-4 text-9xl text-white/15"></i>
+              <p class="text-sm font-bold text-amber-50 mb-1 relative z-10 uppercase tracking-wide">হাতে নগদ (Cash in Hand)</p>
+              <h3 id="dash-cash" class="text-3xl md:text-4xl font-black tabular-nums relative z-10 truncate">0.000 <span class="text-lg">KWD</span></h3>
+              <p class="text-[11px] font-bold text-amber-50/90 mt-2 relative z-10">(মূলধন + মোট কিস্তি আদায়) − (গাড়ি ক্রয় ব্যয় + খরচ)</p>
+            </div>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -917,6 +925,13 @@
       $('dash-inst-collected').innerHTML = `${fmt(totalCollected)} <span class="text-sm">KWD</span>`;
       $('dash-profit').innerHTML = `+${fmt(expectedProfit)} <span class="text-sm">KWD</span>`;
 
+      // --- Cash in Hand = (Total Capital + Total Installments Collected) - (Car Inventory Costs + Expenses) ---
+      const inventoryCost = carsData.reduce((s, c) => s + Number(c.buyPrice || 0), 0);   // all car purchase costs
+      const totalExpenses = expensesData.reduce((s, x) => s + Number(x.amount || 0), 0); // all recorded expenses
+      const cashInHand = (totalCap + totalCollected) - (inventoryCost + totalExpenses);
+      $('dash-cash').innerHTML = `${fmt(cashInHand)} <span class="text-lg">KWD</span>`;
+      $('dash-cash').classList.toggle('text-rose-100', cashInHand < 0); // tint if negative
+
       setupCharts(inStock, sold);
     }
 
@@ -1197,6 +1212,15 @@
       openModal('profileModal');
     };
 
+    // Builds the bilingual (Bangla + English) reminder text for WhatsApp
+    function buildReminderMessage(c, due) {
+      const name = (c.customerName || '').trim() || 'গ্রাহক / Customer';
+      const plate = c.plate || '';
+      const amt = fmt(due);
+      return `সম্মানিত গ্রাহক ${name}, আল জাহরা সমিতি থেকে বিনীত অনুরোধ, আপনার গাড়ির ${plate} বকেয়া কিস্তি ${amt} KWD সময়মতো পরিশোধ করার অনুরোধ করা হচ্ছে।\n\n` +
+             `Dear ${name}, gentle reminder from Al Jahra Shamiti to clear your pending installment of ${amt} KWD on time. Thank you!`;
+    }
+
     function renderProfile() {
       const c = carsData.find(x => x.id === profileCarId);
       if (!c) { window.closeModal('profileModal'); return; }
@@ -1211,7 +1235,11 @@
       const wa = intlNumber(c.whatsapp || c.phone);
       setLink('pf-call', num ? `tel:+${num}` : '');
       setLink('pf-sms', num ? `sms:+${num}` : '');
-      setLink('pf-wa', wa ? `https://wa.me/${wa}` : '');
+      // WhatsApp reminder: wa.me/<number>?text=<encoded message>
+      // intlNumber() strips symbols/spaces and adds 965 for 8-digit Kuwait numbers
+      const waText = due > 0 ? `?text=${encodeURIComponent(buildReminderMessage(c, due))}` : ''; // no text if nothing is due
+      setLink('pf-wa', wa ? `https://wa.me/${wa}${waText}` : '');
+      $('pf-wa').title = due > 0 ? 'বকেয়া কিস্তির রিমাইন্ডার পাঠান' : 'কোনো বকেয়া নেই';
 
       const row = (l, v, cls = 'text-slate-800') => `<div class="flex justify-between gap-4 border-b border-slate-200 pb-2 last:border-0 last:pb-0"><span class="text-slate-500">${l}</span><span class="font-bold text-right ${cls}">${v}</span></div>`;
       $('pf-details').innerHTML =
