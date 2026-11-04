@@ -30,24 +30,54 @@
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
     .fab-button { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); }
-    .pdf-capture { border: none !important; box-shadow: none !important; border-radius: 0 !important; min-height: 0 !important; }
+    /* ---------- Printable documents (receipt / report / history / investor) ---------- */
+    #print-doc { display: none; }
+    .pd { box-sizing: border-box; display: flex; flex-direction: column; width: 100%; color: #0f172a; font-family: 'Hind Siliguri', sans-serif; background: #fff; font-size: 17px; line-height: 1.5; }
+    .pd * { box-sizing: border-box; }
+    .pd-head { text-align: center; border-bottom: 3px solid #0f172a; padding-bottom: 14px; margin-bottom: 18px; }
+    .pd-logo { width: 58px; height: 58px; border-radius: 16px; background: #0f172a; color: #fff; font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .pd-head h1 { font-size: 28px; font-weight: 800; margin: 0; line-height: 1.3; }
+    .pd-ar { font-size: 16px; font-weight: 700; color: #475569; margin: 4px 0 0; }
+    .pd-badge { display: inline-block; margin-top: 14px; padding: 6px 22px; border: 1.5px solid #c7d2fe; background: #eef2ff; color: #3730a3; border-radius: 999px; font-weight: 800; font-size: 18px; }
+    .pd-sub { margin: 10px 0 0; font-weight: 700; color: #64748b; font-size: 15px; }
+    .pd-body { flex: 1; }
+    .pd-h { font-size: 19px; font-weight: 800; margin: 0 0 10px; color: #1e293b; }
+    .pd-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 18px; }
+    .pd-table td, .pd-table th { border: 1px solid #cbd5e1; padding: 11px 14px; vertical-align: middle; }
+    .pd-table th { background: #f1f5f9; font-weight: 800; text-align: left; font-size: 17px; }
+    .pd-table td.r, .pd-table th.r { text-align: right; font-variant-numeric: tabular-nums; }
+    .pd-table td.m { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+    .pd-table tr { page-break-inside: avoid; break-inside: avoid; }
+    .pd-table .g td { background: #ecfdf5; color: #047857; font-weight: 800; }
+    .pd-table .rd td { background: #fff1f2; color: #be123c; font-weight: 800; }
+    .pd-table .am td { background: #fffbeb; color: #b45309; font-weight: 800; }
+    .pd-table .in td { background: #eef2ff; color: #3730a3; font-weight: 800; }
+    .pd-table .hl td { background: #fef3c7; color: #92400e; font-weight: 800; font-size: 22px; }
+    .pd-boxes { display: flex; gap: 14px; margin-bottom: 20px; }
+    .pd-box { flex: 1; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 12px 10px; text-align: center; font-weight: 700; color: #475569; }
+    .pd-box b { display: block; font-size: 26px; font-weight: 800; color: #0f172a; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .pd-big { border: 2px solid #a7f3d0; background: #ecfdf5; border-radius: 16px; padding: 22px 24px; margin: 8px 0 26px; }
+    .pd-big div { display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+    .pd-big .a { font-size: 30px; color: #047857; }
+    .pd-big .b { font-size: 20px; color: #475569; margin-top: 12px; padding-top: 12px; border-top: 1px solid #a7f3d0; }
+    .pd-foot { margin-top: 20px; padding-top: 18px; border-top: 2px dashed #94a3b8; }
+    .pd-foot h4 { text-align: center; font-size: 16px; font-weight: 800; letter-spacing: .05em; margin: 0 0 22px; }
+    .pd-sigs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px 14px; text-align: center; }
+    .pd-sigs.two { grid-template-columns: repeat(2, 1fr); gap: 20px 70px; }
+    .pd-sigs.three { grid-template-columns: repeat(3, 1fr); gap: 20px 40px; }
+    .pd-line { border-bottom: 1.5px solid #0f172a; height: 28px; margin: 0 6px 6px; }
+    .pd-sig span { font-size: 15px; font-weight: 700; color: #334155; }
+    .pd-printed { text-align: center; font-size: 12px; color: #94a3b8; margin: 16px 0 0; }
+    .pd-pdf { min-height: 1085px; padding: 45px; }
 
     @media print {
-      @page { size: A4 portrait; margin: 15mm 10mm; }
-      html, body { height: auto !important; overflow: visible !important; position: static !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
-      #app-container, main { display: block !important; height: auto !important; overflow: visible !important; position: static !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+      @page { size: A4 portrait; margin: 12mm; }
+      html, body { height: auto !important; overflow: visible !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      aside, header, #mobile-bottom-nav, .no-print, #login-screen, #boot-screen { display: none !important; }
-      main { padding: 0 !important; padding-bottom: 0 !important; }
-
-      body.printing-report .tab-section { display: none !important; }
-      body.printing-report #tab-reports { display: block !important; height: auto !important; overflow: visible !important; }
-      body.printing-report #printable-report-area { display: block !important; position: static !important; width: 100% !important; margin: 0 !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
-
-      body.printing-receipt #app-container { display: none !important; }
-      body.printing-receipt .modal-backdrop { display: none !important; }
-      body.printing-receipt #receiptModal { display: block !important; position: static !important; height: auto !important; overflow: visible !important; background: transparent !important; }
-      body.printing-receipt #receiptModal > div { box-shadow: none !important; border: none !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+      body.printing-doc { display: block !important; position: static !important; }
+      body.printing-doc > *:not(#print-doc) { display: none !important; }
+      body.printing-doc #print-doc { display: block !important; }
+      body.printing-doc #print-doc .pd { min-height: 266mm; }
     }
   </style>
 </head>
@@ -162,48 +192,88 @@
         </header>
 
         <section id="tab-dashboard" class="tab-section space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            <div class="bg-gradient-to-br from-blue-500 to-indigo-700 p-6 rounded-3xl shadow-lg shadow-blue-500/20 text-white relative overflow-hidden">
-              <i class="fa-solid fa-users absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
-              <p class="text-sm font-bold text-blue-100 mb-1 relative z-10 uppercase tracking-wide">মালিকদের মূলধন</p>
-              <h3 id="dash-capital" class="text-2xl md:text-3xl font-black tabular-nums relative z-10 truncate">0.000 <span class="text-lg">KWD</span></h3>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg md:text-xl font-black text-slate-800">সমিতির সার্বিক হিসাব</h2>
+              <p class="text-xs font-bold text-slate-400">সব ডিভাইসে রিয়েল-টাইম আপডেট · KWD</p>
             </div>
-
-            <div class="bg-gradient-to-br from-orange-400 to-red-500 p-6 rounded-3xl shadow-lg shadow-orange-500/20 text-white relative overflow-hidden">
-              <i class="fa-solid fa-car absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
-              <p class="text-sm font-bold text-orange-100 mb-1 relative z-10 uppercase tracking-wide">গাড়ি স্টক (ইন / আউট)</p>
-              <h3 id="dash-stock" class="text-2xl md:text-3xl font-black relative z-10 truncate">0 / 0</h3>
-            </div>
-
-            <div class="bg-gradient-to-br from-emerald-400 to-teal-600 p-6 rounded-3xl shadow-lg shadow-emerald-500/20 text-white relative overflow-hidden">
-              <i class="fa-solid fa-hand-holding-dollar absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
-              <p class="text-sm font-bold text-emerald-100 mb-1 relative z-10 uppercase tracking-wide">মোট কিস্তি আদায়</p>
-              <h3 id="dash-inst-collected" class="text-2xl md:text-3xl font-black tabular-nums relative z-10 truncate">0.000 <span class="text-lg">KWD</span></h3>
-            </div>
-
-            <div class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-3xl shadow-lg shadow-purple-500/20 text-white relative overflow-hidden">
-              <i class="fa-solid fa-arrow-trend-up absolute -right-4 -bottom-4 text-8xl text-white/10"></i>
-              <p class="text-sm font-bold text-purple-100 mb-1 relative z-10 uppercase tracking-wide">প্রত্যাশিত মুনাফা (Profit)</p>
-              <h3 id="dash-profit" class="text-2xl md:text-3xl font-black tabular-nums relative z-10 truncate">+0.000 <span class="text-lg">KWD</span></h3>
-            </div>
-
-            <!-- NEW: হাতে নগদ (Cash in Hand) card - full-width row under the 4 existing cards -->
-            <div class="sm:col-span-2 lg:col-span-4 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 p-6 rounded-3xl shadow-lg shadow-amber-500/30 text-white relative overflow-hidden">
-              <i class="fa-solid fa-sack-dollar absolute -right-2 -bottom-4 text-9xl text-white/15"></i>
-              <p class="text-sm font-bold text-amber-50 mb-1 relative z-10 uppercase tracking-wide">হাতে নগদ (Cash in Hand)</p>
-              <h3 id="dash-cash" class="text-3xl md:text-4xl font-black tabular-nums relative z-10 truncate">0.000 <span class="text-lg">KWD</span></h3>
-              <p class="text-[11px] font-bold text-amber-50/90 mt-2 relative z-10">(মূলধন + মোট কিস্তি আদায়) − (গাড়ি ক্রয় ব্যয় + খরচ)</p>
+            <div class="flex gap-2 no-print">
+              <button onclick="openEditCarModal()" class="admin-only bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold shadow-md transition flex items-center gap-2"><i class="fa-solid fa-plus"></i> নতুন গাড়ি</button>
+              <button onclick="switchTab('reports')" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition flex items-center gap-2"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-slate-200">
-              <h3 class="font-black text-slate-800 mb-4 text-lg"><i class="fa-solid fa-chart-line text-indigo-500 mr-2"></i> মাসিক কিস্তি আদায় (শেষ ৬ মাস)</h3>
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-slate-500">মালিকদের মূলধন</p><span class="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><i class="fa-solid fa-users"></i></span></div>
+              <h3 id="dash-capital" class="text-xl md:text-2xl font-black text-slate-900 tabular-nums truncate">0.000</h3>
+              <p id="dash-capital-sub" class="text-[11px] font-bold text-slate-400 mt-1">&nbsp;</p>
+            </div>
+            <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-slate-500">গাড়ি স্টক (ইন / আউট)</p><span class="w-9 h-9 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center"><i class="fa-solid fa-car"></i></span></div>
+              <h3 id="dash-stock" class="text-xl md:text-2xl font-black text-slate-900 truncate">0 / 0</h3>
+              <p id="dash-stock-sub" class="text-[11px] font-bold text-slate-400 mt-1">&nbsp;</p>
+            </div>
+            <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-slate-500">মোট কিস্তি আদায়</p><span class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-hand-holding-dollar"></i></span></div>
+              <h3 id="dash-inst-collected" class="text-xl md:text-2xl font-black text-emerald-600 tabular-nums truncate">0.000</h3>
+              <p id="dash-collected-sub" class="text-[11px] font-bold text-slate-400 mt-1">&nbsp;</p>
+            </div>
+            <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-slate-500">মার্কেটে বকেয়া</p><span class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center"><i class="fa-solid fa-hourglass-half"></i></span></div>
+              <h3 id="dash-due" class="text-xl md:text-2xl font-black text-rose-600 tabular-nums truncate">0.000</h3>
+              <p id="dash-due-sub" class="text-[11px] font-bold text-slate-400 mt-1">&nbsp;</p>
+            </div>
+            <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-slate-500">প্রত্যাশিত মুনাফা</p><span class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-arrow-trend-up"></i></span></div>
+              <h3 id="dash-profit" class="text-xl md:text-2xl font-black text-purple-600 tabular-nums truncate">+0.000</h3>
+              <p id="dash-profit-sub" class="text-[11px] font-bold text-slate-400 mt-1">&nbsp;</p>
+            </div>
+            <div class="bg-amber-50/60 p-4 md:p-5 rounded-2xl border-2 border-amber-300 shadow-sm">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold text-amber-700">হাতে নগদ (Cash in Hand)</p><span class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-sack-dollar"></i></span></div>
+              <h3 id="dash-cash" class="text-xl md:text-2xl font-black text-amber-700 tabular-nums truncate">0.000</h3>
+              <p class="text-[10px] font-bold text-amber-700/70 mt-1 leading-snug">(মূলধন + কিস্তি আদায়) − (গাড়ি ক্রয় + খরচ)</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+            <div class="lg:col-span-2 bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <h3 class="font-black text-slate-800 text-base md:text-lg">কিস্তি আদায় বনাম গাড়ি ক্রয় (শেষ ৬ মাস)</h3>
+                <div class="flex gap-3 text-[11px] font-bold text-slate-500">
+                  <span class="flex items-center gap-1"><i class="fa-solid fa-circle text-emerald-500 text-[8px]"></i> কিস্তি আদায়</span>
+                  <span class="flex items-center gap-1"><i class="fa-solid fa-circle text-indigo-500 text-[8px]"></i> গাড়ি ক্রয়</span>
+                </div>
+              </div>
               <div class="h-64 relative w-full"><canvas id="cashflowChart"></canvas></div>
             </div>
-            <div class="bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col">
-              <h3 class="font-black text-slate-800 mb-4 text-lg"><i class="fa-solid fa-chart-pie text-emerald-500 mr-2"></i> গাড়ির স্টক অনুপাত</h3>
-              <div class="flex-1 relative flex items-center justify-center min-h-[200px]"><canvas id="pieChart"></canvas></div>
+            <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+              <h3 class="font-black text-slate-800 mb-3 text-base md:text-lg">গাড়ির স্টক অনুপাত</h3>
+              <div class="relative flex items-center justify-center h-48"><canvas id="pieChart"></canvas></div>
+              <div id="dash-pie-totals" class="mt-4 space-y-2 text-sm font-bold"></div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-4 md:p-5 border-b border-slate-100 flex items-center justify-between gap-2">
+              <h3 class="font-black text-slate-800 text-base md:text-lg">গাড়ির বর্তমান স্টক ও বিক্রয় বিবরণী</h3>
+              <button onclick="switchTab('cars')" class="text-xs font-bold text-indigo-600 hover:underline whitespace-nowrap">সব দেখুন →</button>
+            </div>
+            <div class="overflow-x-auto max-h-[28rem] overflow-y-auto touch-pan-x">
+              <table class="w-full text-left text-sm text-slate-600 whitespace-nowrap min-w-[760px]">
+                <thead class="bg-slate-50 text-slate-500 text-xs font-black sticky top-0">
+                  <tr>
+                    <th class="p-3 md:p-4">গাড়ি</th>
+                    <th class="p-3 md:p-4">কাস্টমার</th>
+                    <th class="p-3 md:p-4">ক্রয়</th>
+                    <th class="p-3 md:p-4">বিক্রয়</th>
+                    <th class="p-3 md:p-4">আদায়</th>
+                    <th class="p-3 md:p-4">বাকি</th>
+                    <th class="p-3 md:p-4">স্ট্যাটাস</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-table-body" class="divide-y divide-slate-100 font-medium"></tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -239,7 +309,13 @@
         </section>
 
         <section id="tab-installments" class="tab-section hidden space-y-4">
-          <div class="admin-only flex justify-end no-print"><button onclick="showAuditLog()" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md flex items-center gap-2"><i class="fa-solid fa-list-check"></i> পরিবর্তনের লগ (Audit Log)</button></div>
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-3 no-print bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="relative w-full sm:w-96">
+              <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="search-inst" oninput="renderInstallments()" placeholder="খুঁজুন: কাস্টমার, প্লেট, ফোন, গ্যারান্টার..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-sm transition">
+            </div>
+            <button onclick="showAuditLog()" class="admin-only w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2"><i class="fa-solid fa-list-check"></i> পরিবর্তনের লগ (Audit Log)</button>
+          </div>
           <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
             <div class="overflow-x-auto touch-pan-x">
               <table class="w-full text-left text-sm text-slate-600 whitespace-nowrap min-w-[700px]">
@@ -315,8 +391,8 @@
             </div>
             <div class="flex w-full sm:w-auto gap-3">
               <button onclick="generateReportData()" class="flex-1 sm:flex-none bg-slate-800 hover:bg-slate-900 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-md transition">জেনারেট</button>
-              <button onclick="downloadReportPdf()" class="flex-1 sm:flex-none bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 transition"><i class="fa-solid fa-file-pdf"></i> PDF ডাউনলোড</button>
-              <button onclick="executePrint('report')" class="flex-1 sm:flex-none bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 transition">
+              <button onclick="pdfDoc('report')" class="flex-1 sm:flex-none bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 transition"><i class="fa-solid fa-file-pdf"></i> PDF ডাউনলোড</button>
+              <button onclick="printDoc('report')" class="flex-1 sm:flex-none bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 transition">
                 <i class="fa-solid fa-print"></i> প্রিন্ট PDF
               </button>
             </div>
@@ -366,6 +442,10 @@
                   <tr class="bg-amber-50/60">
                     <td class="p-4 border border-slate-200 text-amber-800 font-bold">এই সময়ে খরচ (Expenses in Period)</td>
                     <td id="rep-expenses" class="p-4 border border-slate-200 text-right font-mono font-black text-amber-700">0.000</td>
+                  </tr>
+                  <tr class="bg-yellow-100">
+                    <td class="p-4 border border-slate-200 text-amber-900 font-black">হাতে নগদ (Cash in Hand)</td>
+                    <td id="rep-cash" class="p-4 border border-slate-200 text-right font-mono font-black text-amber-800">0.000</td>
                   </tr>
                   <tr class="bg-indigo-50">
                     <td class="p-4 border border-slate-200 text-indigo-900 font-black">প্রত্যাশিত মোট লাভ (Total Expected Profit)</td>
@@ -542,6 +622,10 @@
         <h3 id="pay-modal-title" class="font-black text-lg text-slate-800">কিস্তির ইতিহাস</h3>
         <button onclick="closeModal('paymentsModal')" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-xmark text-xl"></i></button>
       </div>
+      <div class="flex gap-2 mb-3">
+        <button onclick="printHistory()" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-print mr-1"></i> প্রিন্ট</button>
+        <button onclick="pdfHistory()" class="flex-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-file-pdf mr-1"></i> PDF</button>
+      </div>
       <div id="pay-modal-list" class="divide-y divide-slate-100 text-sm"></div>
     </div>
   </div>
@@ -639,6 +723,61 @@
     </div>
   </div>
 
+  <!-- Capital change modal (deposit / withdraw / fine) -->
+  <div id="capModal" class="modal-backdrop fixed inset-0 bg-slate-900/60 hidden items-center justify-center p-4 z-[65] backdrop-blur-sm no-print">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto border-t-8 border-emerald-500 relative">
+      <div class="flex justify-between items-center mb-1">
+        <h3 class="font-black text-xl text-slate-800">মূলধন পরিবর্তন</h3>
+        <button onclick="closeModal('capModal')" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+      <p id="cap-who" class="text-sm font-bold text-slate-500 mb-4"></p>
+      <form id="cap-form" class="space-y-4 text-sm font-medium">
+        <input type="hidden" id="cap-inv-id">
+        <div>
+          <label class="block font-bold mb-1 text-slate-700">ধরন</label>
+          <select id="cap-type" class="w-full border border-slate-200 p-3 rounded-xl bg-white outline-none focus:ring-2 focus:ring-emerald-500 font-bold">
+            <option value="monthly">মাসিক ৫০ KWD জমা (মূলধনে যোগ)</option>
+            <option value="extra">অতিরিক্ত মূলধন যোগ</option>
+            <option value="withdraw">মূলধন কমানো (উত্তোলন)</option>
+            <option value="fine_paid">জরিমানা পরিশোধ (মূলধন অপরিবর্তিত)</option>
+            <option value="fine_waive">জরিমানা মওকুফ</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block font-bold mb-1 text-slate-700">পরিমাণ (KWD)</label><input type="number" id="cap-amount" step="0.001" min="0.001" required class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 font-mono"></div>
+          <div><label class="block font-bold mb-1 text-slate-700">তারিখ</label><input type="date" id="cap-date" required class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500"></div>
+        </div>
+        <div id="cap-month-wrap">
+          <label class="block font-bold mb-1 text-slate-700">কোন মাসের জন্য?</label>
+          <input type="month" id="cap-month" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+          <p class="text-[10px] text-slate-400 mt-1">* ওই মাসের ৫ তারিখের মধ্যে ৫০ KWD জমা না হলে ৫ KWD জরিমানা হয় (ডিসেম্বর ২০২৬ থেকে)।</p>
+        </div>
+        <div><label class="block font-bold mb-1 text-slate-700">নোট <span id="cap-note-star">*</span></label><input type="text" id="cap-note" placeholder="কেন / কীসের জন্য?" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500"></div>
+        <div id="cap-preview" class="bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-xs font-bold text-emerald-800"></div>
+        <div class="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-100">
+          <button type="button" onclick="closeModal('capModal')" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 rounded-xl font-bold transition">বাতিল</button>
+          <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition shadow-md">সেভ করুন</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Investor capital history modal -->
+  <div id="invHistModal" class="modal-backdrop fixed inset-0 bg-slate-900/60 hidden items-center justify-center p-4 z-[60] backdrop-blur-sm no-print">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto border-t-8 border-indigo-500 relative">
+      <div class="flex justify-between items-center mb-3 gap-2">
+        <h3 id="invhist-title" class="font-black text-lg text-slate-800">মূলধনের ইতিহাস</h3>
+        <button onclick="closeModal('invHistModal')" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+      <div class="flex gap-2 mb-4">
+        <button onclick="printDoc('investor', invHistId())" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-print mr-1"></i> প্রিন্ট</button>
+        <button onclick="pdfDoc('investor', invHistId())" class="flex-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-file-pdf mr-1"></i> PDF</button>
+        <button onclick="openCapModal(invHistId())" class="admin-only flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> পরিবর্তন</button>
+      </div>
+      <div id="invhist-body"></div>
+    </div>
+  </div>
+
   <div id="receiptModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
     <div class="modal-backdrop absolute inset-0 bg-slate-900/60 backdrop-blur-sm no-print" onclick="closeModal('receiptModal')"></div>
     <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 relative z-10 mx-auto">
@@ -662,7 +801,8 @@
       </div>
       <div class="mt-6 flex gap-3 no-print">
         <button onclick="closeModal('receiptModal')" class="flex-1 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-bold text-sm transition">বন্ধ</button>
-        <button onclick="executePrint('receipt')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm transition shadow-md flex justify-center items-center gap-2"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+        <button onclick="pdfDoc('receipt')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold text-sm transition shadow-md flex justify-center items-center gap-2"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+        <button onclick="printDoc('receipt')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm transition shadow-md flex justify-center items-center gap-2"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
       </div>
     </div>
   </div>
@@ -670,6 +810,9 @@
   <!-- ==========================================
        APP LOGIC (Firebase: Auth + Firestore realtime sync)
   =========================================== -->
+  <!-- Hidden container used for print (A4 full page) -->
+  <div id="print-doc"></div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -714,6 +857,7 @@
     let investorsData = [];
     let paymentsData = [];
     let expensesData = [];
+    let capitalLogData = [];
     let auditData = [];
     let paidByCar = {};
     let userRole = null;
@@ -757,7 +901,6 @@
     window.closeModal = (id) => {
       const m = $(id);
       m.classList.add('hidden'); m.classList.remove('flex');
-      document.body.classList.remove('printing-receipt');
     };
 
     // Audit log: every edit / delete is stored here (admin can read it)
@@ -813,7 +956,7 @@
           if (userRole === 'admin') startAuditListener();
         } else {
           userRole = null;
-          carsData = []; investorsData = []; paymentsData = []; expensesData = []; auditData = []; paidByCar = {};
+          carsData = []; investorsData = []; paymentsData = []; expensesData = []; capitalLogData = []; auditData = []; paidByCar = {};
           showLogin();
         }
       });
@@ -865,7 +1008,8 @@
         listen('cars', (rows) => { carsData = rows.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)); }),
         listen('investors', (rows) => { investorsData = rows.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0)); }),
         listen('payments', (rows) => { paymentsData = rows.sort((a, b) => (b.date || 0) - (a.date || 0)); }),
-        listen('expenses', (rows) => { expensesData = rows.sort((a, b) => (b.date || 0) - (a.date || 0)); })
+        listen('expenses', (rows) => { expensesData = rows.sort((a, b) => (b.date || 0) - (a.date || 0)); }),
+        listen('capitalLog', (rows) => { capitalLogData = rows; })
       ];
     }
     function startAuditListener() {
@@ -889,6 +1033,7 @@
       generateReportData();
       if (historyCarId && !$('paymentsModal').classList.contains('hidden')) renderHistory();
       if (profileCarId && !$('profileModal').classList.contains('hidden')) renderProfile();
+      if (invHistoryId && !$('invHistModal').classList.contains('hidden')) renderInvHistory();
     }
 
     window.switchTab = (tab) => {
@@ -908,29 +1053,58 @@
       });
     };
 
+    const kwdHtml = (n, cls = 'text-xs font-bold text-slate-400') => `${fmt(n)} <span class="${cls}">KWD</span>`;
+
     function renderDashboard() {
       const totalCap = investorsData.reduce((s, i) => s + Number(i.capital || 0), 0);
       const totalCollected = paymentsData.reduce((s, p) => s + Number(p.amount || 0), 0);
       const inStock = carsData.filter(c => c.status === 'stock').length;
       const sold = carsData.filter(c => c.status === 'sold').length;
 
-      let expectedProfit = 0;
+      let expectedProfit = 0, totalSell = 0, dueCars = 0;
       carsData.forEach(c => {
         const sell = Number(c.sellPrice || 0), buy = Number(c.buyPrice || 0);
         if (sell > buy) expectedProfit += (sell - buy);
+        totalSell += sell;
+        if (sell - paidOf(c.id) > 0.0005) dueCars++;
       });
-
-      $('dash-capital').innerHTML = `${fmt(totalCap)} <span class="text-sm">KWD</span>`;
-      $('dash-stock').innerText = `${inStock} টি স্টকে / ${sold} বিক্রি`;
-      $('dash-inst-collected').innerHTML = `${fmt(totalCollected)} <span class="text-sm">KWD</span>`;
-      $('dash-profit').innerHTML = `+${fmt(expectedProfit)} <span class="text-sm">KWD</span>`;
-
-      // --- Cash in Hand = (Total Capital + Total Installments Collected) - (Car Inventory Costs + Expenses) ---
+      const due = totalSell - totalCollected;
       const inventoryCost = carsData.reduce((s, c) => s + Number(c.buyPrice || 0), 0);   // all car purchase costs
       const totalExpenses = expensesData.reduce((s, x) => s + Number(x.amount || 0), 0); // all recorded expenses
+      // Cash in Hand = (Total Capital + Total Installments Collected) - (Car Inventory Costs + Expenses)
       const cashInHand = (totalCap + totalCollected) - (inventoryCost + totalExpenses);
-      $('dash-cash').innerHTML = `${fmt(cashInHand)} <span class="text-lg">KWD</span>`;
-      $('dash-cash').classList.toggle('text-rose-100', cashInHand < 0); // tint if negative
+
+      $('dash-capital').innerHTML = kwdHtml(totalCap);
+      $('dash-capital-sub').innerText = `${investorsData.length} জন ইনভেস্টর`;
+      $('dash-stock').innerText = `${inStock} / ${sold}`;
+      $('dash-stock-sub').innerText = `${inStock} টি স্টকে · ${sold} টি বিক্রি · মোট ${carsData.length}`;
+      $('dash-inst-collected').innerHTML = kwdHtml(totalCollected);
+      $('dash-collected-sub').innerText = totalSell > 0 ? `বিক্রয় মূল্যের ${(totalCollected / totalSell * 100).toFixed(1)}%` : 'কোনো বিক্রয় নেই';
+      $('dash-due').innerHTML = kwdHtml(due);
+      $('dash-due-sub').innerText = `${dueCars} টি গাড়িতে বকেয়া আছে`;
+      $('dash-profit').innerHTML = `+${kwdHtml(expectedProfit, 'text-xs font-bold text-purple-300')}`;
+      $('dash-profit-sub').innerText = `ক্রয় ব্যয়: ${fmt(inventoryCost)} KWD`;
+      $('dash-cash').innerHTML = kwdHtml(cashInHand, 'text-xs font-bold text-amber-500');
+      $('dash-cash').classList.toggle('text-rose-600', cashInHand < 0);
+
+      // Stock / sales table
+      $('dash-table-body').innerHTML = carsData.length ? carsData.map(c => {
+        const sell = Number(c.sellPrice || 0), paid = paidOf(c.id), d = sell - paid;
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-3 md:p-4"><div class="font-mono font-black text-indigo-700">${esc(c.plate)}</div><div class="text-xs text-slate-500 font-bold">${esc(c.model)}</div></td>
+          <td class="p-3 md:p-4 font-bold text-slate-700">${esc(c.customerName) || '—'}</td>
+          <td class="p-3 md:p-4 font-mono font-bold text-slate-500">${fmt(c.buyPrice)}</td>
+          <td class="p-3 md:p-4 font-mono font-bold text-slate-800">${fmt(sell)}</td>
+          <td class="p-3 md:p-4 font-mono font-bold text-emerald-600">${fmt(paid)}</td>
+          <td class="p-3 md:p-4 font-mono font-bold ${d > 0.0005 ? 'text-rose-600' : 'text-slate-400'}">${fmt(d)}</td>
+          <td class="p-3 md:p-4"><span class="${c.status === 'sold' ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'} px-3 py-1 rounded-lg text-xs font-black">${c.status === 'sold' ? 'বিক্রি' : 'স্টকে'}</span></td>
+        </tr>`;
+      }).join('') : '<tr><td colspan="7" class="p-8 text-center text-slate-400 font-bold">এখনও কোনো গাড়ি নেই</td></tr>';
+
+      $('dash-pie-totals').innerHTML =
+        `<div class="flex justify-between"><span class="flex items-center gap-2"><i class="fa-solid fa-circle text-amber-500 text-[9px]"></i> স্টকে আছে</span><span>${inStock} টি</span></div>` +
+        `<div class="flex justify-between"><span class="flex items-center gap-2"><i class="fa-solid fa-circle text-emerald-500 text-[9px]"></i> বিক্রি হয়েছে</span><span>${sold} টি</span></div>` +
+        `<div class="flex justify-between border-t border-slate-100 pt-2 text-slate-800"><span>মোট গাড়ি</span><span>${carsData.length} টি</span></div>`;
 
       setupCharts(inStock, sold);
     }
@@ -940,38 +1114,46 @@
       const months = [];
       for (let k = 5; k >= 0; k--) {
         const d = new Date(now.getFullYear(), now.getMonth() - k, 1);
-        months.push({ y: d.getFullYear(), m: d.getMonth(), label: d.toLocaleDateString('en-US', { month: 'short' }), total: 0 });
+        months.push({ y: d.getFullYear(), m: d.getMonth(), label: d.toLocaleDateString('en-US', { month: 'short' }), collected: 0, bought: 0 });
       }
-      paymentsData.forEach(p => {
-        const d = new Date(p.date);
-        const slot = months.find(x => x.y === d.getFullYear() && x.m === d.getMonth());
-        if (slot) slot.total += Number(p.amount || 0);
-      });
+      const slotOf = (ms) => { const d = new Date(ms); return months.find(x => x.y === d.getFullYear() && x.m === d.getMonth()); };
+      paymentsData.forEach(p => { const s = slotOf(p.date); if (s) s.collected += Number(p.amount || 0); });
+      carsData.forEach(c => { if (c.createdAt) { const s = slotOf(c.createdAt); if (s) s.bought += Number(c.buyPrice || 0); } });
 
       if (cashflowChart) cashflowChart.destroy();
       cashflowChart = new Chart($('cashflowChart').getContext('2d'), {
         type: 'line',
         data: {
           labels: months.map(x => x.label),
-          datasets: [{
-            label: 'Collection (KWD)',
-            data: months.map(x => Number(x.total.toFixed(3))),
-            borderColor: '#6366f1', backgroundColor: 'rgba(99, 102, 241, 0.1)',
-            borderWidth: 3, fill: true, tension: 0.4,
-            pointBackgroundColor: '#fff', pointBorderColor: '#6366f1', pointRadius: 4
-          }]
+          datasets: [
+            { label: 'কিস্তি আদায়', data: months.map(x => Number(x.collected.toFixed(3))), borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: '#fff', pointBorderColor: '#10b981', pointRadius: 4 },
+            { label: 'গাড়ি ক্রয়', data: months.map(x => Number(x.bought.toFixed(3))), borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,0.06)', borderWidth: 3, fill: false, tension: 0.4, pointBackgroundColor: '#fff', pointBorderColor: '#6366f1', pointRadius: 4 }
+          ]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
       });
 
+      const total = inStock + sold;
+      const centerText = {
+        id: 'centerText',
+        afterDraw(chart) {
+          const a = chart.chartArea; if (!a) return;
+          const ctx = chart.ctx, x = (a.left + a.right) / 2, y = (a.top + a.bottom) / 2;
+          ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillStyle = '#0f172a'; ctx.font = '800 28px "Hind Siliguri", sans-serif'; ctx.fillText(String(total), x, y - 8);
+          ctx.fillStyle = '#94a3b8'; ctx.font = '700 11px "Hind Siliguri", sans-serif'; ctx.fillText('মোট গাড়ি', x, y + 16);
+          ctx.restore();
+        }
+      };
       if (pieChart) pieChart.destroy();
       pieChart = new Chart($('pieChart').getContext('2d'), {
         type: 'doughnut',
         data: {
-          labels: ['স্টকে আছে', 'বিক্রি হয়েছে'],
-          datasets: [{ data: [inStock, sold], backgroundColor: ['#f59e0b', '#10b981'], borderWidth: 0 }]
+          labels: total ? ['স্টকে আছে', 'বিক্রি হয়েছে'] : ['কোনো গাড়ি নেই'],
+          datasets: [{ data: total ? [inStock, sold] : [1], backgroundColor: total ? ['#f59e0b', '#10b981'] : ['#e2e8f0'], borderWidth: 0 }]
         },
-        options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom' } } }
+        options: { responsive: true, maintainAspectRatio: false, cutout: '72%', plugins: { legend: { display: false } } },
+        plugins: [centerText]
       });
     }
 
@@ -1063,7 +1245,10 @@
 
     // --- Installments ---
     function renderInstallments() {
-      $('installments-table-body').innerHTML = carsData.map(c => {
+      const q = (($('search-inst') || { value: '' }).value || '').trim().toLowerCase();
+      const list = !q ? carsData : carsData.filter(c =>
+        [c.plate, c.customerName, c.guarantor, c.phone, c.whatsapp, c.model].some(v => String(v || '').toLowerCase().includes(q)));
+      $('installments-table-body').innerHTML = list.length ? list.map(c => {
         const sell = Number(c.sellPrice || 0);
         const paid = paidOf(c.id);
         const due = sell - paid;
@@ -1090,7 +1275,7 @@
             </div>
           </td>
         </tr>`;
-      }).join('');
+      }).join('') : '<tr><td colspan="5" class="p-8 text-center text-slate-400 font-bold">কোনো ফলাফল পাওয়া যায়নি</td></tr>';
     }
 
     // --- Collect / edit a payment ---
@@ -1157,6 +1342,10 @@
         $('r-collector').innerText = collector;
         $('r-paid').innerText = fmt(amount) + ' KWD';
         $('r-due').innerText = fmt(Number(c.sellPrice || 0) - paidBefore - amount) + ' KWD';
+        lastReceipt = {
+          date: fmtDate(date), car: c.plate + ' (' + c.model + ')', customer: c.customerName || '—', guarantor: c.guarantor || '—',
+          collector, paid: fmt(amount) + ' KWD', due: fmt(Number(c.sellPrice || 0) - paidBefore - amount) + ' KWD'
+        };
         openModal('receiptModal');
       } else {
         const old = paymentsData.find(x => x.id === id);
@@ -1357,8 +1546,8 @@
     };
 
     // --- Audit log viewer (admin) ---
-    const ACTION_LABELS = { payment_edit: 'কিস্তি এডিট', expense_edit: 'খরচ এডিট', expense_delete: 'খরচ ডিলিট', car_delete: 'গাড়ি ডিলিট' };
-    const SNAP_LABELS = { amount: 'পরিমাণ', collector: 'আদায়কারী', date: 'তারিখ', description: 'বিবরণ', paidBy: 'খরচকারী', note: 'নোট', plate: 'প্লেট', model: 'মডেল', customerName: 'কাস্টমার', phone: 'ফোন', sellPrice: 'বিক্রয় মূল্য', buyPrice: 'ক্রয় মূল্য', paymentsCount: 'কিস্তি সংখ্যা', paymentsTotal: 'মোট আদায়' };
+    const ACTION_LABELS = { payment_edit: 'কিস্তি এডিট', expense_edit: 'খরচ এডিট', expense_delete: 'খরচ ডিলিট', car_delete: 'গাড়ি ডিলিট', capital_change: 'মূলধন পরিবর্তন' };
+    const SNAP_LABELS = { amount: 'পরিমাণ', collector: 'আদায়কারী', date: 'তারিখ', description: 'বিবরণ', paidBy: 'খরচকারী', note: 'নোট', plate: 'প্লেট', model: 'মডেল', customerName: 'কাস্টমার', phone: 'ফোন', sellPrice: 'বিক্রয় মূল্য', buyPrice: 'ক্রয় মূল্য', paymentsCount: 'কিস্তি সংখ্যা', paymentsTotal: 'মোট আদায়', capital: 'মূলধন' };
     function formatSnap(o) {
       if (!o) return '';
       return Object.entries(o).map(([k, v]) => {
@@ -1416,12 +1605,18 @@
         $('i-id').value = i.id;
         $('i-name').value = i.name;
         $('i-capital').value = i.capital;
+        $('i-capital').readOnly = true;          // capital can only change through "মূলধন পরিবর্তন" (keeps history)
+        $('i-capital').classList.add('bg-slate-100', 'cursor-not-allowed');
+        $('i-capital').title = 'মূলধন বদলাতে কার্ডের "মূলধন +/−" বাটন ব্যবহার করুন';
         $('i-share').value = i.share;
         $('i-check').value = i.check;
         $('i-nominee').value = i.nominee || '';
       } else {
         $('investor-modal-title').innerText = 'নতুন ইনভেস্টর যোগ';
         $('i-id').value = '';
+        $('i-capital').readOnly = false;
+        $('i-capital').classList.remove('bg-slate-100', 'cursor-not-allowed');
+        $('i-capital').title = '';
       }
       openModal('investorModal');
     };
@@ -1433,7 +1628,6 @@
       const fileInput = $('i-photo');
       const data = {
         name: $('i-name').value,
-        capital: Number($('i-capital').value),
         share: Number($('i-share').value),
         check: $('i-check').value,
         nominee: $('i-nominee').value.trim()
@@ -1442,8 +1636,21 @@
         if (fileInput.files.length > 0) data.photo = await compressImage(fileInput.files[0]);
       } catch (err) { return alert('ছবি পড়া যায়নি, অন্য ছবি দিন।'); }
 
-      if (id) updateDoc(doc(db, 'investors', id), data).catch(fail);
-      else addDoc(collection(db, 'investors'), { ...data, createdAt: Date.now() }).catch(fail);
+      if (id) {
+        updateDoc(doc(db, 'investors', id), data).catch(fail);   // capital is NOT touched here
+      } else {
+        const capital = Number($('i-capital').value) || 0;
+        const batch = writeBatch(db);
+        const invRef = doc(collection(db, 'investors'));
+        batch.set(invRef, { ...data, capital, createdAt: Date.now() });
+        if (capital > 0) {
+          batch.set(doc(collection(db, 'capitalLog')), {
+            investorId: invRef.id, investorName: data.name, type: 'initial', amount: capital,
+            before: 0, after: capital, date: Date.now(), forMonth: '', note: 'শুরুর মূলধন', by: meEmail(), createdAt: Date.now()
+          });
+        }
+        batch.commit().catch(fail);
+      }
       closeModal('investorModal');
     });
 
@@ -1452,8 +1659,57 @@
       if (confirm('এই ইনভেস্টর প্রোফাইল সম্পূর্ণ মুছে ফেলবেন?')) deleteDoc(doc(db, 'investors', id)).catch(fail);
     };
 
+    // ---------- Monthly 50 KWD rule + automatic 5 KWD fine ----------
+    // Each investor should deposit MONTHLY_REQ by the 5th of every month. From FINE_START onward, a month
+    // that is not fully paid by 23:59 on the 5th gets a FINE_AMT fine. The fine is calculated on the fly
+    // (never stored), so it is always correct. Paid / waived fines are stored in capitalLog.
+    const MONTHLY_REQ = 50, FINE_AMT = 5, DEADLINE_DAY = 5, FINE_START = [2026, 12];
+    const ymKey = (y, m) => `${y}-${pad2(m)}`;
+    const deadlineMs = (y, m) => new Date(y, m - 1, DEADLINE_DAY, 23, 59, 59, 999).getTime();
+    const monthLabel = (y, m) => new Date(y, m - 1, 1).toLocaleDateString('bn-BD', { month: 'long', year: 'numeric' });
+    const sumAmt = (arr) => arr.reduce((s, l) => s + Number(l.amount || 0), 0);
+
+    function monthlyStatus(invId, now = Date.now(), logs = capitalLogData) {
+      const mine = logs.filter(l => l.investorId === invId);
+      const nd = new Date(now);
+      const months = [];
+      let y = FINE_START[0], m = FINE_START[1];
+      while (y < nd.getFullYear() || (y === nd.getFullYear() && m <= nd.getMonth() + 1)) {
+        const key = ymKey(y, m), dl = deadlineMs(y, m);
+        const forThis = mine.filter(l => l.type === 'monthly' && l.forMonth === key);
+        const onTime = sumAmt(forThis.filter(l => Number(l.date) <= dl));
+        const total = sumAmt(forThis);
+        const overdue = now > dl;
+        const fined = overdue && onTime < MONTHLY_REQ - 0.0005;
+        const status = onTime >= MONTHLY_REQ - 0.0005 ? 'ok' : (overdue ? (total >= MONTHLY_REQ - 0.0005 ? 'late' : 'missed') : 'pending');
+        months.push({ key, y, m, label: monthLabel(y, m), deadline: dl, onTime, total, overdue, fined, status });
+        m++; if (m > 12) { m = 1; y++; }
+      }
+      const fineTotal = months.filter(x => x.fined).length * FINE_AMT;
+      const finePaid = sumAmt(mine.filter(l => l.type === 'fine_paid'));
+      const waived = sumAmt(mine.filter(l => l.type === 'fine_waive'));
+      return { months, fineTotal, finePaid, waived, owed: Math.max(0, fineTotal - finePaid - waived) };
+    }
+    window.__monthlyStatus = monthlyStatus; // exposed for testing
+
+    const CAP_LABELS = { initial: 'শুরুর মূলধন', monthly: 'মাসিক জমা', extra: 'অতিরিক্ত জমা', withdraw: 'মূলধন কমানো', fine_paid: 'জরিমানা পরিশোধ', fine_waive: 'জরিমানা মওকুফ' };
+    const CAP_COLORS = { initial: 'bg-slate-100 text-slate-700', monthly: 'bg-emerald-100 text-emerald-700', extra: 'bg-emerald-100 text-emerald-700', withdraw: 'bg-rose-100 text-rose-700', fine_paid: 'bg-amber-100 text-amber-800', fine_waive: 'bg-sky-100 text-sky-700' };
+    const capDelta = (l) => (l.type === 'withdraw' ? -1 : (['initial', 'monthly', 'extra'].includes(l.type) ? 1 : 0)) * Number(l.amount || 0);
+    const STATUS_TXT = { ok: ['✓ সময়মতো জমা', 'text-emerald-600'], pending: ['⏳ ৫ তারিখের মধ্যে জমা দিন', 'text-amber-600'], late: ['দেরিতে জমা — জরিমানা', 'text-rose-600'], missed: ['জমা হয়নি — জরিমানা', 'text-rose-600'] };
+
     function renderInvestors() {
-      $('investors-grid').innerHTML = investorsData.map(i => `
+      const today = new Date();
+      const started = today.getFullYear() > FINE_START[0] || (today.getFullYear() === FINE_START[0] && today.getMonth() + 1 >= FINE_START[1]);
+      $('investors-grid').innerHTML = investorsData.map(i => {
+        const ms = monthlyStatus(i.id);
+        const cur = ms.months[ms.months.length - 1];
+        let ruleRow = `<div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">মাসিক ৫০ KWD:</span> <span class="text-slate-400 font-bold text-xs">${monthLabel(FINE_START[0], FINE_START[1])} থেকে শুরু</span></div>`;
+        if (started && cur) {
+          const [txt, cls] = STATUS_TXT[cur.status];
+          ruleRow = `<div class="flex justify-between border-b border-slate-200 pb-2 gap-2"><span class="text-slate-500">${esc(cur.label)}:</span> <span class="${cls} font-bold text-right text-xs">${txt} (${fmt(cur.onTime)}/${MONTHLY_REQ})</span></div>` +
+            (ms.owed > 0 ? `<div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-rose-600 font-bold">জরিমানা বাকি:</span> <span class="font-mono font-black text-rose-600">${fmt(ms.owed)} KWD</span></div>` : '');
+        }
+        return `
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col hover:shadow-md transition">
           <div class="flex gap-4 items-center mb-4">
             <div class="w-20 h-20 bg-slate-100 rounded-2xl overflow-hidden shadow-inner border border-slate-200 flex-shrink-0">
@@ -1463,24 +1719,140 @@
               <h4 class="font-black text-xl text-slate-900">${esc(i.name)}</h4>
               <div class="mt-1 flex gap-2">
                 <span class="bg-indigo-50 text-indigo-700 font-bold px-2 py-0.5 rounded text-xs border border-indigo-100">${esc(i.share)}% শেয়ার</span>
+                ${ms.owed > 0 ? `<span class="bg-rose-50 text-rose-700 font-bold px-2 py-0.5 rounded text-xs border border-rose-100">জরিমানা ${fmt(ms.owed)}</span>` : ''}
               </div>
             </div>
           </div>
 
           <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2 text-sm font-medium">
              <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">মূলধন:</span> <span class="font-mono font-black text-slate-800">${fmt(i.capital)} KWD</span></div>
+             ${ruleRow}
              <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-slate-500">চেকবুক:</span> <span class="${i.check === 'Yes' ? 'text-emerald-600' : 'text-rose-500'} font-bold">${i.check === 'Yes' ? 'হ্যাঁ (Yes)' : 'না (No)'}</span></div>
              <div class="flex justify-between"><span class="text-slate-500">নমিনি:</span> <span class="text-slate-800 font-bold">${esc(i.nominee) || 'N/A'}</span></div>
           </div>
 
+          <div class="mt-4 flex gap-2 pt-2">
+            <button onclick="showInvHistory('${esc(i.id)}')" class="flex-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-100 font-bold py-2.5 rounded-xl text-sm transition"><i class="fa-solid fa-clock-rotate-left mr-1"></i> ইতিহাস</button>
+            ${userRole === 'admin' ? `<button onclick="openCapModal('${esc(i.id)}')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition"><i class="fa-solid fa-plus-minus mr-1"></i> মূলধন +/−</button>` : ''}
+          </div>
           ${userRole === 'admin' ? `
-            <div class="mt-4 flex gap-2 pt-2">
+            <div class="mt-2 flex gap-2">
               <button onclick="openEditInvestorModal('${esc(i.id)}')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-sm transition"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
               <button onclick="deleteInvestor('${esc(i.id)}')" class="flex-1 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold py-2.5 rounded-xl text-sm transition"><i class="fa-solid fa-trash mr-1"></i> Del</button>
             </div>
           ` : ''}
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
+    }
+
+    // ---------- Capital change (deposit / withdraw / fine) ----------
+    function updateCapForm() {
+      const t = $('cap-type').value;
+      $('cap-month-wrap').style.display = ['monthly', 'fine_paid', 'fine_waive'].includes(t) ? '' : 'none';
+      $('cap-note-star').style.display = t === 'monthly' ? 'none' : '';
+      $('cap-note').required = t !== 'monthly';
+      const inv = investorsData.find(x => x.id === $('cap-inv-id').value);
+      if (!inv) return;
+      const amt = Number($('cap-amount').value) || 0, cap = Number(inv.capital || 0), ms = monthlyStatus(inv.id);
+      let txt;
+      if (t === 'withdraw') txt = `মূলধন: ${fmt(cap)} → ${fmt(cap - amt)} KWD`;
+      else if (t === 'monthly' || t === 'extra') txt = `মূলধন: ${fmt(cap)} → ${fmt(cap + amt)} KWD`;
+      else txt = `বর্তমান জরিমানা বাকি: ${fmt(ms.owed)} KWD · মূলধন অপরিবর্তিত (${fmt(cap)})`;
+      $('cap-preview').innerText = txt;
+    }
+    ['cap-type', 'cap-amount'].forEach(id => $(id).addEventListener('input', updateCapForm));
+
+    window.openCapModal = (invId) => {
+      if (userRole !== 'admin') return;
+      const inv = investorsData.find(x => x.id === invId);
+      if (!inv) return;
+      $('cap-form').reset();
+      $('cap-inv-id').value = invId;
+      $('cap-who').innerText = `${inv.name} — বর্তমান মূলধন ${fmt(inv.capital)} KWD`;
+      $('cap-date').value = todayStr();
+      $('cap-month').value = todayStr().slice(0, 7);
+      $('cap-type').value = 'monthly';
+      $('cap-amount').value = MONTHLY_REQ;
+      updateCapForm();
+      openModal('capModal');
+    };
+
+    $('cap-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (userRole !== 'admin') return;
+      const inv = investorsData.find(x => x.id === $('cap-inv-id').value);
+      if (!inv) return;
+      const type = $('cap-type').value;
+      const amount = Number($('cap-amount').value);
+      const dateStr = $('cap-date').value;
+      const note = $('cap-note').value.trim();
+      const forMonth = ['monthly', 'fine_paid', 'fine_waive'].includes(type) ? ($('cap-month').value || dateStr.slice(0, 7)) : '';
+      if (!(amount > 0)) return alert('ভুল পরিমাণ (Invalid amount)');
+      if (!dateStr) return alert('তারিখ দিন।');
+      if (type !== 'monthly' && !note) return alert('নোট লিখুন (কেন এই পরিবর্তন)।');
+
+      const date = dateToMs(dateStr);
+      const before = Number(inv.capital || 0);
+      const entry = { investorId: inv.id, investorName: inv.name, type, amount, date, forMonth, note, by: meEmail(), createdAt: Date.now() };
+      const batch = writeBatch(db);
+      let after = before;
+      if (type === 'monthly' || type === 'extra') after = before + amount;
+      if (type === 'withdraw') after = before - amount;
+      if (after < 0) return alert('মূলধন ০ এর নিচে যেতে পারবে না।');
+      if (type === 'monthly' || type === 'extra' || type === 'withdraw') {
+        entry.before = before; entry.after = after;
+        batch.update(doc(db, 'investors', inv.id), { capital: after });
+      }
+      batch.set(doc(collection(db, 'capitalLog')), entry);
+      batch.commit().catch(fail);
+      logAudit('capital_change', `${inv.name}: ${CAP_LABELS[type]} ${fmt(amount)} KWD${forMonth ? ' (' + forMonth + ')' : ''}`,
+        { capital: before }, { capital: after }, note);
+      closeModal('capModal');
+    });
+
+    // ---------- Investor history (screen) ----------
+    let invHistoryId = null;
+    window.invHistId = () => invHistoryId;
+    window.showInvHistory = (id) => { invHistoryId = id; renderInvHistory(); openModal('invHistModal'); };
+
+    function renderInvHistory() {
+      const inv = investorsData.find(x => x.id === invHistoryId);
+      if (!inv) { window.closeModal('invHistModal'); return; }
+      $('invhist-title').innerText = `মূলধনের ইতিহাস — ${inv.name}`;
+      const logs = capitalLogData.filter(l => l.investorId === inv.id).sort((a, b) => (b.date - a.date) || ((b.createdAt || 0) - (a.createdAt || 0)));
+      const ms = monthlyStatus(inv.id);
+      const net = logs.reduce((s, l) => s + capDelta(l), 0);
+      const startCap = Number(inv.capital || 0) - net;
+
+      let html = `<div class="grid grid-cols-2 gap-2 mb-4">
+        <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-center"><div class="text-[11px] font-bold text-emerald-700">বর্তমান মূলধন</div><div class="font-mono font-black text-emerald-800">${fmt(inv.capital)}</div></div>
+        <div class="${ms.owed > 0 ? 'bg-rose-50 border-rose-100' : 'bg-slate-50 border-slate-100'} border rounded-xl p-3 text-center"><div class="text-[11px] font-bold ${ms.owed > 0 ? 'text-rose-700' : 'text-slate-500'}">জরিমানা বাকি</div><div class="font-mono font-black ${ms.owed > 0 ? 'text-rose-700' : 'text-slate-500'}">${fmt(ms.owed)}</div></div>
+      </div>`;
+
+      html += `<h4 class="font-black text-sm text-slate-700 mb-2">মাসিক ৫০ KWD (ডিসেম্বর ২০২৬ থেকে)</h4>`;
+      html += ms.months.length ? `<div class="divide-y divide-slate-100 mb-4 border border-slate-100 rounded-xl px-3">` + [...ms.months].reverse().map(x => {
+        const [txt, cls] = STATUS_TXT[x.status];
+        return `<div class="py-2 flex justify-between gap-2 text-xs"><span class="font-bold text-slate-700">${esc(x.label)}</span><span class="${cls} font-bold text-right">${txt} · ${fmt(x.onTime)}/${MONTHLY_REQ}${x.fined ? ` · জরিমানা ${FINE_AMT}` : ''}</span></div>`;
+      }).join('') + `</div>` : `<p class="text-xs text-slate-400 font-bold mb-4">নিয়মটি ${monthLabel(FINE_START[0], FINE_START[1])} থেকে শুরু হবে।</p>`;
+
+      html += `<h4 class="font-black text-sm text-slate-700 mb-2">মূলধন ও জরিমানার লেনদেন</h4>`;
+      html += logs.length ? `<div class="divide-y divide-slate-100 text-sm">` + logs.map(l => {
+        const d = capDelta(l);
+        const amtTxt = d !== 0 ? `${d > 0 ? '+' : '−'}${fmt(Math.abs(d))}` : fmt(l.amount);
+        return `<div class="py-3 flex justify-between items-start gap-3">
+          <div class="min-w-0">
+            <span class="${CAP_COLORS[l.type] || 'bg-slate-100'} text-[10px] font-black px-2 py-0.5 rounded">${esc(CAP_LABELS[l.type] || l.type)}</span>
+            <div class="text-xs text-slate-500 font-bold mt-1">${fmtDate(l.date)}${l.forMonth ? ' · ' + esc(l.forMonth) : ''}</div>
+            ${l.note ? `<div class="text-xs text-slate-600 mt-0.5 break-words">${esc(l.note)}</div>` : ''}
+          </div>
+          <div class="text-right flex-shrink-0">
+            <div class="font-mono font-black ${d < 0 ? 'text-rose-600' : d > 0 ? 'text-emerald-700' : 'text-amber-700'}">${amtTxt}</div>
+            ${l.after != null ? `<div class="text-[10px] text-slate-400 font-bold">→ ${fmt(l.after)}</div>` : ''}
+          </div>
+        </div>`;
+      }).join('') + `</div>` : '<p class="text-slate-400 text-center py-4 font-bold text-sm">এখনও কোনো লেনদেন নেই</p>';
+      if (logs.length) html += `<p class="text-[11px] text-slate-400 font-bold mt-3">ইতিহাস শুরুর আগে মূলধন ছিল: ${fmt(startCap)} KWD</p>`;
+      $('invhist-body').innerHTML = html;
     }
 
     // --- Reports ---
@@ -1491,79 +1863,177 @@
       return [new Date(y, n.getMonth(), 1), new Date(y, n.getMonth() + 1, 1)];
     }
 
-    window.generateReportData = () => {
-      const type = $('report-type').value;
-      const displayObj = { Monthly: 'মাসিক (Monthly)', Quarterly: 'ত্রৈমাসিক (Quarterly)', Yearly: 'বাৎসরিক (Yearly)' };
-      $('rep-display-type').innerText = displayObj[type];
-
+    // All the numbers of the report in one place (screen preview, print and PDF all use this)
+    function reportNumbers(type) {
       const [start, end] = periodRange(type);
-      const lastDay = new Date(end.getTime() - 1);
-      $('rep-period').innerText = `সময়কাল: ${fmtDate(start)} – ${fmtDate(lastDay)}`;
-
       const inPeriod = (ms) => ms >= start.getTime() && ms < end.getTime();
       const totalBuy = carsData.reduce((a, c) => a + Number(c.buyPrice || 0), 0);
       const totalSell = carsData.reduce((a, c) => a + Number(c.sellPrice || 0), 0);
       const totalPaid = paymentsData.reduce((a, p) => a + Number(p.amount || 0), 0);
       const periodPaid = paymentsData.filter(p => inPeriod(p.date)).reduce((a, p) => a + Number(p.amount || 0), 0);
       const periodExpenses = expensesData.filter(x => inPeriod(x.date)).reduce((a, x) => a + Number(x.amount || 0), 0);
+      const allExpenses = expensesData.reduce((a, x) => a + Number(x.amount || 0), 0);
       const totalCap = investorsData.reduce((a, i) => a + Number(i.capital || 0), 0);
+      let profit = 0;
+      carsData.forEach(c => { if (c.sellPrice > c.buyPrice) profit += (c.sellPrice - c.buyPrice); });
+      // Cash in Hand = (Total Capital + Total Installments Collected) - (Car Inventory Costs + Expenses)
+      const cash = (totalCap + totalPaid) - (totalBuy + allExpenses);
+      return { start, end, totalCap, totalBuy, periodPaid, totalPaid, due: totalSell - totalPaid, periodExpenses, profit, cash };
+    }
+    const REPORT_TYPES = { Monthly: 'মাসিক (Monthly)', Quarterly: 'ত্রৈমাসিক (Quarterly)', Yearly: 'বাৎসরিক (Yearly)' };
 
-      let expectedProfit = 0;
-      carsData.forEach(c => { if (c.sellPrice > c.buyPrice) expectedProfit += (c.sellPrice - c.buyPrice); });
-
-      $('rep-capital').innerText = fmt(totalCap);
-      $('rep-car-cost').innerText = fmt(totalBuy);
-      $('rep-inst-collected').innerText = fmt(periodPaid);
-      $('rep-inst-total').innerText = fmt(totalPaid);
-      $('rep-due').innerText = fmt(totalSell - totalPaid);
-      $('rep-expenses').innerText = fmt(periodExpenses);
-      $('rep-profit').innerText = '+' + fmt(expectedProfit);
+    window.generateReportData = () => {
+      const type = $('report-type').value;
+      const r = reportNumbers(type);
+      $('rep-display-type').innerText = REPORT_TYPES[type];
+      $('rep-period').innerText = `সময়কাল: ${fmtDate(r.start)} – ${fmtDate(new Date(r.end.getTime() - 1))}`;
+      $('rep-capital').innerText = fmt(r.totalCap);
+      $('rep-car-cost').innerText = fmt(r.totalBuy);
+      $('rep-inst-collected').innerText = fmt(r.periodPaid);
+      $('rep-inst-total').innerText = fmt(r.totalPaid);
+      $('rep-due').innerText = fmt(r.due);
+      $('rep-expenses').innerText = fmt(r.periodExpenses);
+      $('rep-cash').innerText = fmt(r.cash);
+      $('rep-profit').innerText = '+' + fmt(r.profit);
     };
 
+    // ---------- Full-page A4 documents (used by Print AND PDF) ----------
+    const SOC_NAME = 'আল জাহরা প্রবাসী বন্ধন সমিতি কুয়েত';
+    let lastReceipt = null;
+
+    function docShell(badge, sub, body, foot) {
+      return `<div class="pd">
+        <div class="pd-head"><div class="pd-logo">ج</div><h1>${SOC_NAME}</h1>
+          <p class="pd-ar">الجهراء رابطة المغتربين — Kuwait Car Dealership</p>
+          <div class="pd-badge">${badge}</div>${sub ? `<p class="pd-sub">${sub}</p>` : ''}</div>
+        <div class="pd-body">${body}</div>
+        <div class="pd-foot">${foot}<p class="pd-printed">তৈরির সময়: ${fmtDateTime(Date.now())}</p></div>
+      </div>`;
+    }
+    const sig = (label) => `<div class="pd-sig"><div class="pd-line"></div><span>${esc(label)}</span></div>`;
+    const kv = (rows) => `<table class="pd-table">${rows.map(([k, v, cls]) => `<tr class="${cls || ''}"><td>${k}</td><td class="r m">${v}</td></tr>`).join('')}</table>`;
+
+    function receiptDoc() {
+      const r = lastReceipt; if (!r) return '';
+      const body =
+        kv([['তারিখ', esc(r.date)], ['গাড়ি (Car)', esc(r.car)], ['কাস্টমার', esc(r.customer)], ['গ্যারান্টার', esc(r.guarantor)], ['আদায়কারী', esc(r.collector)]]) +
+        `<div class="pd-big"><div class="a"><span>কিস্তি আদায়</span><span>${esc(r.paid)}</span></div><div class="b"><span>বর্তমান বকেয়া</span><span>${esc(r.due)}</span></div></div>`;
+      return docShell('ডিজিটাল মানি রিসিট', '', body, `<div class="pd-sigs two">${sig('আদায়কারীর স্বাক্ষর')}${sig('গ্রাহকের স্বাক্ষর')}</div>`);
+    }
+
+    function reportDoc() {
+      const type = $('report-type').value, r = reportNumbers(type);
+      const body = `<table class="pd-table"><thead><tr><th>বিবরণ (Description)</th><th class="r">অ্যামাউন্ট (KWD)</th></tr></thead><tbody>
+        <tr><td>মোট ইনভেস্টর মূলধন (Total Capital)</td><td class="r m">${fmt(r.totalCap)}</td></tr>
+        <tr><td>গাড়ি ক্রয় ব্যয় (Inventory Cost)</td><td class="r m">${fmt(r.totalBuy)}</td></tr>
+        <tr class="g"><td>এই সময়ে কিস্তি আদায় (Collected in Period)</td><td class="r m">${fmt(r.periodPaid)}</td></tr>
+        <tr class="g"><td>সর্বমোট কিস্তি আদায় (All-time Collected)</td><td class="r m">${fmt(r.totalPaid)}</td></tr>
+        <tr class="rd"><td>মার্কেটে বকেয়া (Total Market Due)</td><td class="r m">${fmt(r.due)}</td></tr>
+        <tr class="am"><td>এই সময়ে খরচ (Expenses in Period)</td><td class="r m">${fmt(r.periodExpenses)}</td></tr>
+        <tr class="hl"><td>হাতে নগদ (Cash in Hand)</td><td class="r m">${fmt(r.cash)}</td></tr>
+        <tr class="in"><td>প্রত্যাশিত মোট লাভ (Total Expected Profit)</td><td class="r m">+${fmt(r.profit)}</td></tr>
+      </tbody></table>`;
+      const foot = `<h4>বোর্ড সদস্যদের স্বাক্ষর (BOARD SIGNATURES)</h4><div class="pd-sigs">${printMembers.map((n, i) => sig(`${i + 1}. ${n}`)).join('')}</div>`;
+      return docShell(`হিসাব বিবরণী: ${REPORT_TYPES[type]}`, `সময়কাল: ${fmtDate(r.start)} – ${fmtDate(new Date(r.end.getTime() - 1))}`, body, foot);
+    }
+
+    function historyDoc(carId) {
+      const c = carsData.find(x => x.id === carId); if (!c) return '';
+      const rows = paymentsData.filter(p => p.carId === carId).sort((a, b) => a.date - b.date);
+      const sell = Number(c.sellPrice || 0), paid = paidOf(carId), due = sell - paid;
+      const body =
+        kv([['গাড়ি', `${esc(c.plate)} — ${esc(c.model)}`], ['কাস্টমার', esc(c.customerName) || '—'], ['ফোন', esc(c.phone) || '—'], ['গ্যারান্টার', esc(c.guarantor) || '—']]) +
+        `<div class="pd-boxes"><div class="pd-box">বিক্রয় মূল্য<b>${fmt(sell)}</b></div><div class="pd-box">মোট আদায়<b style="color:#047857">${fmt(paid)}</b></div><div class="pd-box">বাকি<b style="color:#be123c">${fmt(due)}</b></div></div>
+         <table class="pd-table"><thead><tr><th>#</th><th>তারিখ</th><th>আদায়কারী</th><th class="r">পরিমাণ (KWD)</th></tr></thead><tbody>` +
+        (rows.length ? rows.map((p, i) => `<tr><td>${i + 1}</td><td>${fmtDate(p.date)}${p.editedAt ? ' <small>(এডিট)</small>' : ''}</td><td>${esc(p.collector) || '—'}</td><td class="r m">${fmt(p.amount)}</td></tr>`).join('') : '<tr><td colspan="4" style="text-align:center">কোনো কিস্তি আদায় হয়নি</td></tr>') +
+        `<tr class="g"><td colspan="3">মোট আদায়</td><td class="r m">${fmt(paid)}</td></tr></tbody></table>`;
+      return docShell('কিস্তির ইতিহাস (Payment Statement)', esc(c.customerName || c.plate), body, `<div class="pd-sigs three">${sig('আদায়কারী')}${sig('গ্রাহক')}${sig('সমিতির পক্ষে')}</div>`);
+    }
+
+    function investorDoc(invId) {
+      const inv = investorsData.find(x => x.id === invId); if (!inv) return '';
+      const logs = capitalLogData.filter(l => l.investorId === invId).sort((a, b) => (a.date - b.date) || ((a.createdAt || 0) - (b.createdAt || 0)));
+      const ms = monthlyStatus(invId);
+      const body =
+        kv([['ইনভেস্টর', esc(inv.name)], ['শেয়ার', `${esc(inv.share)}%`], ['বর্তমান মূলধন', `${fmt(inv.capital)} KWD`, 'g'], ['জরিমানা বাকি', `${fmt(ms.owed)} KWD`, ms.owed > 0 ? 'rd' : '']]) +
+        `<p class="pd-h">মূলধন ও জরিমানার লেনদেন</p>
+         <table class="pd-table"><thead><tr><th>তারিখ</th><th>ধরন</th><th>নোট</th><th class="r">পরিমাণ</th><th class="r">মূলধন</th></tr></thead><tbody>` +
+        (logs.length ? logs.map(l => { const d = capDelta(l); return `<tr><td>${fmtDate(l.date)}</td><td>${esc(CAP_LABELS[l.type] || l.type)}${l.forMonth ? `<br><small>${esc(l.forMonth)}</small>` : ''}</td><td>${esc(l.note) || '—'}</td><td class="r m">${d < 0 ? '−' : d > 0 ? '+' : ''}${fmt(Math.abs(d) || l.amount)}</td><td class="r m">${l.after != null ? fmt(l.after) : '—'}</td></tr>`; }).join('') : '<tr><td colspan="5" style="text-align:center">কোনো লেনদেন নেই</td></tr>') +
+        `</tbody></table>` +
+        (ms.months.length ? `<p class="pd-h">মাসিক ৫০ KWD অবস্থা</p><table class="pd-table"><thead><tr><th>মাস</th><th>অবস্থা</th><th class="r">জমা</th><th class="r">জরিমানা</th></tr></thead><tbody>` +
+          ms.months.map(x => `<tr><td>${esc(x.label)}</td><td>${STATUS_TXT[x.status][0].replace(/^[^\s]+\s/, '')}</td><td class="r m">${fmt(x.onTime)}</td><td class="r m">${x.fined ? fmt(FINE_AMT) : '—'}</td></tr>`).join('') + `</tbody></table>` : '');
+      return docShell('ইনভেস্টর মূলধন বিবরণী', esc(inv.name), body, `<div class="pd-sigs two">${sig('ইনভেস্টরের স্বাক্ষর')}${sig('কোষাধ্যক্ষ / বোর্ড')}</div>`);
+    }
+
+    function docHtml(type, arg) {
+      if (type === 'receipt') return receiptDoc();
+      if (type === 'history') return historyDoc(arg);
+      if (type === 'investor') return investorDoc(arg);
+      return reportDoc();
+    }
+    function docFileName(type, arg) {
+      const clean = (s) => String(s || '').replace(/[\\/:*?"<>|\s]+/g, '_');
+      if (type === 'receipt') return `Receipt-${clean(lastReceipt && lastReceipt.car)}-${todayStr()}.pdf`;
+      if (type === 'history') { const c = carsData.find(x => x.id === arg); return `Installments-${clean(c && c.plate)}-${todayStr()}.pdf`; }
+      if (type === 'investor') { const i = investorsData.find(x => x.id === arg); return `Investor-${clean(i && i.name)}-${todayStr()}.pdf`; }
+      return `Al-Jahra-Report-${$('report-type').value}-${todayStr()}.pdf`;
+    }
+
     // Print: wait for fonts, and only clean up AFTER the print dialog closes
-    window.executePrint = async (type) => {
-      const printClass = type === 'receipt' ? 'printing-receipt' : 'printing-report';
-      if (type === 'report') window.generateReportData();
-      document.body.classList.add(printClass);
+    window.printDoc = async (type, arg) => {
+      const html = docHtml(type, arg);
+      if (!html) return alert('প্রিন্ট করার মতো তথ্য পাওয়া যায়নি।');
+      $('print-doc').innerHTML = html;
+      document.body.classList.add('printing-doc');
       try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (err) {}
       await new Promise(r => setTimeout(r, 400));
       const cleanup = () => {
-        document.body.classList.remove(printClass);
+        document.body.classList.remove('printing-doc');
+        $('print-doc').innerHTML = '';
         window.removeEventListener('afterprint', cleanup);
       };
       window.addEventListener('afterprint', cleanup);
       window.print();
       setTimeout(cleanup, 60000); // fallback for browsers that never fire afterprint
     };
+    window.executePrint = (type) => window.printDoc(type);
 
-    // Real PDF file download (does not depend on the PC's print settings)
-    window.downloadReportPdf = async () => {
+    // Real PDF file download. The page is built in its own clean A4-sized box on <body>, so the app's
+    // scrolling/hidden-overflow containers can never clip it (that was what produced empty pages).
+    window.pdfDoc = async (type, arg) => {
       if (!window.html2pdf) {
-        alert('PDF টুল লোড হয়নি। ইন্টারনেট চেক করে পেজ রিফ্রেশ করুন, অথবা "প্রিন্ট PDF" ব্যবহার করুন।');
+        alert('PDF টুল লোড হয়নি। ইন্টারনেট চেক করে পেজ রিফ্রেশ করুন, অথবা "প্রিন্ট" ব্যবহার করুন।');
         return;
       }
-      window.generateReportData();
-      const el = $('printable-report-area');
-      const mainEl = document.querySelector('main');
-      if (mainEl) mainEl.scrollTop = 0;
-      el.classList.add('pdf-capture');
+      const html = docHtml(type, arg);
+      if (!html) return alert('PDF বানানোর মতো তথ্য পাওয়া যায়নি।');
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:absolute;left:0;top:0;width:794px;background:#fff;z-index:-1;';
+      wrap.innerHTML = html;
+      wrap.firstElementChild.classList.add('pd-pdf');
+      document.body.appendChild(wrap);
       try {
         if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        await new Promise(r => setTimeout(r, 200));
         await html2pdf().set({
-          margin: [10, 8, 10, 8],
-          filename: `Al-Jahra-Report-${$('report-type').value}-${todayStr()}.pdf`,
+          margin: 0,
+          filename: docFileName(type, arg),
           image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 1000, scrollX: 0, scrollY: 0 },
+          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 794, scrollX: 0, scrollY: 0 },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-          pagebreak: { mode: ['css', 'legacy'] }
-        }).from(el).save();
+          pagebreak: { mode: ['css', 'legacy'], avoid: ['tr', '.pd-foot'] }
+        }).from(wrap.firstElementChild).save();
       } catch (err) {
         console.error(err);
-        alert('PDF বানাতে সমস্যা হয়েছে। "প্রিন্ট PDF" বাটন চেষ্টা করুন।');
+        alert('PDF বানাতে সমস্যা হয়েছে। "প্রিন্ট" বাটন চেষ্টা করুন।');
       } finally {
-        el.classList.remove('pdf-capture');
+        wrap.remove();
       }
     };
+    window.downloadReportPdf = () => window.pdfDoc('report');
+    window.printHistory = () => window.printDoc('history', historyCarId);
+    window.pdfHistory = () => window.pdfDoc('history', historyCarId);
+    window.renderInstallments = renderInstallments;
   </script>
 </body>
 </html>
